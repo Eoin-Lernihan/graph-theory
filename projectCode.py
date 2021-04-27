@@ -8,8 +8,18 @@ checker = word
 endsWithMatch = checker.endswith('$')
 startsWithMatch = checker.startswith('^')
 digitMatch = ("/d" == checker)
-if digitMatch:
+notDigitMatch = ("/D" == checker)
+if digitMatch or notDigitMatch:
   checker = "0|1|2|3|4|5|6|7|8|9"
+characterMatch = ("/w" == checker)
+notCharacterMatch = ("/W" == checker)
+if characterMatch or notCharacterMatch:
+  lowerChecker = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|"
+  capChecker = "|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|"
+  otherChecker = "|_|0|1|2|3|4|5|6|7|8|9"
+  alphaChecker = lowerChecker + capChecker
+  checker = alphaChecker + otherChecker
+  print(checker)
 alternatives = "|" in checker
 trueWords = checker.split("|")
 exactMatch = startsWithMatch and endsWithMatch
@@ -26,25 +36,26 @@ line = f.readline()
 while line:
   if exactMatch:
     if trueWord == line:
-      print("exactMatch found")
-      line = line.rstrip()
+      print(line)
   elif startsWithMatch:
     if line.startswith(trueWord):
-      print("query found")
-      line = line.rstrip()
+      print(line)
   elif endsWithMatch:
     if line.endswith(trueWord):
       print(line)
-      line = line.rstrip()
+  elif notDigitMatch:
+    if not any(substring in line for substring in trueWords):
+      print(line)
+  elif notCharacterMatch:
+    if not any(substring in line for substring in trueWords):
+      print(line)
   elif alternatives:
     if any(substring in line for substring in trueWords):
-      print("alternatives query found")
-      line = line.rstrip()
+      print(line)
   else:
     if trueWord in line:
-      print("query found")
-      line = line.rstrip()
       print(line)
+     
   line = f.readline()
 f.close()
 
