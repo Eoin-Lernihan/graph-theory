@@ -7,6 +7,9 @@ word = input("Enter the regular expertion you would like to found ")
 checker = word
 endsWithMatch = checker.endswith('$')
 startsWithMatch = checker.startswith('^')
+digitMatch = ("/d" == checker)
+if digitMatch:
+  checker = "0|1|2|3|4|5|6|7|8|9"
 alternatives = "|" in checker
 trueWords = checker.split("|")
 exactMatch = startsWithMatch and endsWithMatch
@@ -31,7 +34,7 @@ while line:
       line = line.rstrip()
   elif endsWithMatch:
     if line.endswith(trueWord):
-      print("query found")
+      print(line)
       line = line.rstrip()
   elif alternatives:
     if any(substring in line for substring in trueWords):
