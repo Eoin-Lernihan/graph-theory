@@ -5,6 +5,7 @@ path = input("Enter the directory you would like to use ")
 
 word = input("Enter the regular expertion you would like to found ")
 checker = word
+containsMatch = "." in checker
 endsWithMatch = checker.endswith('$')
 startsWithMatch = checker.startswith('^')
 digitMatch = ("/d" == checker)
@@ -17,8 +18,8 @@ if characterMatch or notCharacterMatch:
   lowerChecker = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|"
   capChecker = "A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|"
   otherChecker = "_|0|1|2|3|4|5|6|7|8|9"
-  alphaChecker = lowerChecker + capChecker
-  checker = alphaChecker + otherChecker
+  alphaChecker = lowerChecker + capChecker + otherChecker
+  checker = alphaChecker
   print(checker)
 wordSepMatch = ("/s" == checker)
 notWordSepMatch = ("/S" == checker)
@@ -29,8 +30,8 @@ trueWords = checker.split("|")
 exactMatch = startsWithMatch and endsWithMatch
 print(exactMatch)
 trueWord = word
-if '.' in word:
-  print("query found")
+if containsMatch == True:
+  trueWords = checker.split(".")[0]
 if startsWithMatch == True:
   trueWord = trueWord.replace('^', '')
 if endsWithMatch == True:
@@ -40,6 +41,9 @@ line = f.readline()
 while line:
   if exactMatch:
     if trueWord == line:
+      print(line)
+  elif containsMatch:
+    if trueWord in line:
       print(line)
   elif startsWithMatch:
     if line.startswith(trueWord):
