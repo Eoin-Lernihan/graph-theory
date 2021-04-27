@@ -15,11 +15,15 @@ characterMatch = ("/w" == checker)
 notCharacterMatch = ("/W" == checker)
 if characterMatch or notCharacterMatch:
   lowerChecker = "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|"
-  capChecker = "|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|"
-  otherChecker = "|_|0|1|2|3|4|5|6|7|8|9"
+  capChecker = "A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|"
+  otherChecker = "_|0|1|2|3|4|5|6|7|8|9"
   alphaChecker = lowerChecker + capChecker
   checker = alphaChecker + otherChecker
   print(checker)
+wordSepMatch = ("/s" == checker)
+notWordSepMatch = ("/S" == checker)
+if wordSepMatch or notWordSepMatch:
+  checker =" |\t|\n"
 alternatives = "|" in checker
 trueWords = checker.split("|")
 exactMatch = startsWithMatch and endsWithMatch
@@ -43,10 +47,7 @@ while line:
   elif endsWithMatch:
     if line.endswith(trueWord):
       print(line)
-  elif notDigitMatch:
-    if not any(substring in line for substring in trueWords):
-      print(line)
-  elif notCharacterMatch:
+  elif notDigitMatch or notCharacterMatch or notWordSepMatch:
     if not any(substring in line for substring in trueWords):
       print(line)
   elif alternatives:
