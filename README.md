@@ -3,7 +3,11 @@
 
 
 ## description 
-    A simple search for txt that can print, write and find words in lines amongst them
+    A search tool that uses reads in a txt file using regular expression with re or imports
+     The tool curently has 
+        1.^
+        2.$
+        
 
 ## Instructions
     Type in python project.py on the command line
