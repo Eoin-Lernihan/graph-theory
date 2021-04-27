@@ -4,7 +4,7 @@
 
 ## description 
     A search tool that uses reads in a txt file using regular expression with re or imports
-     The tool curently has(hhh(or 3 of any) are used to show case how thry are typed in to use) 
+     The tool curently has(hhh(or 3 of any)) are used to show case how thry are typed in to use) 
         1.hhh. (finds any instance of hhh)
         2.^hhh (finds any intance of hhh at the start of the string)
         3.hhh$ (finds any intance of hhh at the end of the string)
