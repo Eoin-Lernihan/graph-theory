@@ -1,15 +1,18 @@
-
+import sys
 
 print("Hello there user")
 word = ''
 
-path = input("Enter the directory you would like to use ")
+path =  sys.argv[1]
 
-word = input("Enter the regular expertion you would like to found ")
+word = sys.argv[2]
 checker = word
+
 containsMatch = "." in checker
 endsWithMatch = checker.endswith('$')
 startsWithMatch = checker.startswith('^')
+exactMatch = startsWithMatch and endsWithMatch
+
 digitMatch = ("/d" == checker)
 notDigitMatch = ("/D" == checker)
 if digitMatch or notDigitMatch:
@@ -29,15 +32,23 @@ if wordSepMatch or notWordSepMatch:
   checker =" |\t|\n"
 alternatives = "|" in checker
 trueWords = checker.split("|")
-exactMatch = startsWithMatch and endsWithMatch
-print(exactMatch)
+
 trueWord = word
+crotchetEndsWithMatch = checker.endswith(']')
+crotchetStartsWithMatch = checker.startswith('[')
+crotchetsMatch = crotchetStartsWithMatch and crotchetEndsWithMatch
+
 if containsMatch == True:
   trueWords = checker.split(".")[0]
 if startsWithMatch == True:
   trueWord = trueWord.replace('^', '')
 if endsWithMatch == True:
   trueWord = trueWord.replace('$', '')
+if crotchetStartsWithMatch == True:
+  trueWord = trueWord.replace('[', '')
+if crotchetEndsWithMatch == True:
+  trueWord = trueWord.replace(']', '')
+
 f = open(path, 'r')
 line = f.readline()
 while line:
