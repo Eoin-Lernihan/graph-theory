@@ -32,42 +32,50 @@ A regular expression (regex or regexp for short) is a special text string for de
 Stephen Kleene invented regular expressions in the mid-1950 tho they first appeared in a program setting in Ken Thompson’s version of the QED text editor in the mid-1960s and was later patent it in 1967 by ken (https://www.oreilly.com/library/view/beautiful-code/9780596510046/ch01.html#:~:text=Stephen%20Kleene%20invented%20regular%20expressions,automata%20in%20what%20they%20represent.)
 https://medium.com/@zohaibshahzadTO/regular-expressions-character-classes-findall-method-c4b4d71d353a
 ## How do regular expressions differ across implementations?
+below is an example of the differance betwwen python and java regular expessions given the smae pattern
+(https://stackoverflow.com/questions/30527195/different-behavior-of-same-regular-expression-in-python-and-java)
 ```python
 import re
-
-txt = "now stand aside worthy adversary"
-x = re.search("adversary$", txt)
+p = re.compile("[0-9]*(?:\\.[0-9]+)?[^0-9]*D\\([MW]\\)\\s*US")
+test_str = "9.5 D(M) US"
+print re.search(p, test_str).group()
 ```
-```java
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+result will be:
+9.5 D(M) US
+ escape characters in regular expressions, \\d in Java, and \d in python
 
-public class Main {
-  public static void main(String[] args) {
-    Pattern pattern = Pattern.compile("flesh", Pattern.CASE_INSENSITIVE);
-    Matcher matcher = pattern.matcher("tis but a flesh wound");
-    boolean matchFound = matcher.find();
-    if(matchFound) {
-      System.out.println("Match found");
-    } else {
-      System.out.println("Match not found");
+```java
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.regex.*;
+class Ideone
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Pattern FALLBACK_MEN_SIZE_PATTERN = Pattern.compile("([0-9]*)([\\.[0-9]+]?)([^0-9]*)D\\([M|W]\\)\\s*US");
+        String strTest = "9.5 D(M) US";
+        Matcher matcher = FALLBACK_MEN_SIZE_PATTERN.matcher(strTest);
+        if (matcher.find()) {
+            System.out.println(matcher.group(1));
+            System.out.println(matcher.group(2));
+            System.out.println(matcher.group(3));
+        }
     }
-  }
+ 
 }
 ```
-```javascript
-<!DOCTYPE html>
-<html>
-<body>
-<p id="demo"></p>
-<script>
-var str = "Visit W3Schools!"; 
-var n = str.search("W3Schools");
-document.getElementById("demo").innerHTML = n;
-</script>
-</body>
-</html>
-```
+result will be 
+5
 
-
+explanastion
+[\.[0-9]+]?
+java|
+java see this as a one chacater macth, "." or a numberic digit.
+java see this as one total expersion
+Python see this as 2 seperate expersion
+The first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters"." or a numberic digit. The second pattern is "]?" matches the "]" characters, 
+so the following text "123.+[]" in java will give 8 matches("1","2","3",".","+","","","","")
+python give the following matches ("123.","[]")
 ## Can all formal languages be encoded as regular expressions?
+ A formal language consists of words whose letters are taken from an alphabet and are well-formed according to a specific set of rules. Not formaly you regular experssion will give syntax errors due to formal languages are strict on it's rules. It is possible given that your regular expression is quite percise it would be possible. regylar expression is also drived form formal languages 
