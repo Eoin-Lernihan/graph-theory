@@ -4,7 +4,7 @@
 
 ## description 
     A search tool that uses reads in a txt file using regular expression with re or imports
-     The tool curently has(hhh(or 3 of any)) are used to show case how thry are typed in to use) 
+    The tool curently has(hhh(or 3 of any)) are used to show case how they are typed in to use 
         1.hhh. (finds any instance of hhh)
         2.^hhh (finds any intance of hhh at the start of the string)
         3.hhh$ (finds any intance of hhh at the end of the string)
@@ -18,13 +18,29 @@
         11.\S (checks the string to see if they have no space, tabs or new lines)
 
 ## Instructions
-    Type in python projectCode.py on the command line
-    type in the file directory
-    type what regular expresion you wish to do
-    and let the code do the rest
+
+python regex.py <filename>  <pattern> 
+filename :  the full path for the file iuncludiong directory
+pattern : the pattern in which to search encloised in double quotes 
+
+and let the code do the rest
+e.g.  
+
+```console
+PS C:\Users\eoinb\Desktop\graphy thory\graph-theory> python regex.py test.txt "\d"
+Hello there user
+Matched  \d in >>> cats dog mice 1 <<<
+Matched  \d in >>> Keep them spirsts high 49 <<<
+Matched  \d in >>> mice ducks6 <<<
+
+====Finished Matching=======
+Thank you for using this code:)
+Have a wondefulday
+```
 
 ## The explanation of the algorithm
 
+The first the algorithm does is parse the pattern (in RegularMatch.compile) into tokens., it does this by determining the type of match associated with the token that is required. Once the pattern has been compile each line in the file is matched against the pattern. The matches are determined in an order so that the more specific match are done first. 
 
 ## What is a regular expression?
 Stephen Kleene invented regular expressions in the mid-1950 "as a notation for finite automata" although the first use in a programming was by Ken Thompson’s QED text editor in the mid-1960s. He later went on to register a patent for it. In the 1980s In the 1980s Henry Spencer (1986) wrote more complex versio nfor perl and TCL. Regex functionality is built into most programming langauges by default.  
@@ -55,14 +71,19 @@ The above components can be combined in order to give complex patterns that sear
 #### Processor
 There are two kinds of regular expression engines: text-directed engines, and regex-directed engines. Jeffrey
 Friedl calls them DFA and NFA engines, respectively. 
+
 ##### DFA engine
-Deterministic Finite Automaton (DFA): there is always the same output for the same starting value and input. 
+Deterministic Finite Automaton (DFA): there is always the same output for the same starting value and input.  So there is one outcome given whcih is important fopr representing formal langauges.
+
 ##### NFA engine 
 Non-Deterministic Finite Automaton (NFA) : there can be multiple  outputs for the same starting value and input. 
 
-Although they are commonly classified as "text"  or "regex" directed. 
-<b>Text</b> directed process each character in the text and looks for a match in teh regexp. If none found it moves to the next character in the text.
-<b>regexp</b> directed takes the a elemnt of the regexp pattern and tries to find a match in the text. If none found move to teh next element in the regexp.  
+In general there is two  commonly classified implemantion , "text"  or "regex" directed. 
+
+<b>Text</b> directed process each character in the text and looks for a match in teh regexp. If none found it moves to the next character in the text. 
+
+<b>Regexp</b> directed takes the a elemnt of the regexp pattern and tries to find a match in the text. If none found move to teh next element in the regexp.  
+
 
 
 ## How do regular expressions differ across implementations?
@@ -97,55 +118,47 @@ result will be 5 matches in java
 
 This is cause by escape characters in regular expressions, "\\d" in Java while in python it is "\d"
 
-explanastion
+<b>More Examples</b>
 
 Let see another way java and python differ using
 [\.[0-9]+]? as the regex with the following text "123.+[]"
 Java | Python
 ------------ | -------------
   Java see this as one total expersion | Python see this as 2 seperate expersion
-  Java | 
 Java will give 8 matches("1","2","3",".","+","","","","") | python give the following matches ("123.","[]")
+|
 
-The reasoning for the above is the first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters"." or a numberic digit. The second pattern is "]?" matches the "]" characters so java will see this as a one chacater macth, "." or a numberic digit.
+The reasoning for the above is that java see the expression as one.  So the first part of it ending in the first "]" (i.e. the <b>[\.[0-9]</b>) "+" after that matches that muliplte intances of the characters (".",  a digit) The second pattern is "]?" matches the "]" characters so java will see this as a one chacater match.
 
-
-java see this as one total expersion
 Python see this as 2 seperate expersion
-The first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters"." or a numberic digit. The second pattern is "]?" matches the "]" characters, 
-so the following text "123.+[]"
+The first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters because of the "." or a numberic digit. The second pattern is "]?" matches the "]" characters, so the following text "123.+[]"
 
- in java will give 8 matches("1","2","3",".","+","","","","")
-python give the following matches ("123.","[]")
-
-### Text Directed Verus Regexp implementation
+### Text directed Verus Regexp directed implementation
 
 #### Text Directed
-
-##### Sumarry
+As the engine process each chartacter in the target string it keeps track of the poissible matches, it then proceeds to the next character and sees if the this character firs the possible matches , eliminates mismatches on the way.     
 
 ##### Advantages
-
+Always matches the one most characters.
 ##### Disadvantages
 Doesn't have backtraking 
+
 ##### Example implementation
-(Set|SetValue) on input "SetValue" will match "SetValue"
+(Set|SetValue) on input "SetValue" will match "SetValue", because when the character "V" in the input , it will discount the "Set" alaternative.
+
 #### Regexp Directed
 ##### Sumarry
 Starting at the first character in the target text a sub set of the pattern (form left to right) is used to verfiy that this contains a match. It adds another that sub set a repearts for verifaction of a match in the target text. If that fails it goes to the next character in the target text and repeats the process until it finds the first success in the total pattern
 ##### Advantages
 Does have backtraking 
-##### Disadvantages
 
 ##### Example implementation
 (Set|SetValue) on input "SetValue" will match "Set"
 
-
-
-
-## Can all formal languages be encoded as regular expressions?
+## <b>Can all formal languages be encoded as regular expressions?</b>
 ### <b>Formal Languages </b>
 Formal languages represent concepts that are alligned with speicfic meaning using words. The grammar of formal languages is a means to define the language. Therefore these langauges consists of a set of words and are combined to a set of rules.
+The langaugues recursive stucures such as "(()())"
 
 #### <b>Grammar</b>
 Grammar (or formal grammar) is used to describe and explain strings derived from an alaphabeth of a language. Grammar also  ensures that according to that languague's syntax the strings are valid. Grammar is used in formal language theory ultimately to give clarity.
@@ -176,12 +189,12 @@ statement ::=
 ```
 https://web.mit.edu/6.005/www/fa15/classes/17-regex-grammars/
 
+### <b>Conclusion</b>
 The above demonstrates an instant where regular expression for java  caputures most of the syantax. However, it does not cover nested parenthesis e.g nested if else, for loops etc..
-while simple languages could be repsented in regex it simply doesn't make sense for mor formal languages when the required regex expression can be extremely commplex making it very hard to understand and maintain. This makes it extremely difficult keep track and follow what is happening inside of the expression.
+while simple languages could be repsented in regex it simply doesn't make sense for mor formal languages when the required regex expression can be extremely commplex making it very hard to understand and maintain. This makes it extremely difficult keep track and follow what is happening inside of the expression. The reason why there is no way for finite automata to count i.e the number of open brackts as per Lawson, 2004 in his book
 
+#### Links
 https://web.mit.edu/6.005/www/fa15/classes/17-regex-grammars/
-
-
 
 (https://www.oreilly.com/library/view/beautiful-code/9780596510046/ch01.html#:~:text=Stephen%20Kleene%20invented%20regular%20expressions,automata%20in%20what%20they%20represent.)
 https://medium.com/@zohaibshahzadTO/regular-expressions-character-classes-findall-method-c4b4d71d353a
