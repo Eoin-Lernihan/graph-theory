@@ -1,8 +1,8 @@
-# graph-theory-project-G00365942
+# Graph-theory-project-G00365942
 
 
 
-## description 
+## Description 
     A search tool that uses reads in a txt file using regular expression with re or imports
     The tool curently has(hhh(or 3 of any)) are used to show case how they are typed in to use 
         1.hhh. (finds any instance of hhh)
@@ -90,7 +90,8 @@ In general there is two  commonly classified implemantion , "text"  or "regex" d
 ### Programming language implementations
 below is an example of the differance between python and java regular expessions given the smae pattern
 (https://stackoverflow.com/questions/30527195/different-behavior-of-same-regular-expression-in-python-and-java)
-### python regex example
+
+### Python regex example
 ```python
 import re
 p = re.compile("[0-9]*(?:\\.[0-9]+)?[^0-9]*D\\([MW]\\)\\s*US")
@@ -114,7 +115,7 @@ result will be:
         }
     }
 ```
-result will be 5 matches in java
+this will result in 5 matches in java
 
 This is cause by escape characters in regular expressions, "\\d" in Java while in python it is "\d"
 
