@@ -68,6 +68,7 @@ Although they are commonly classified as "text"  or "regex" directed.
 ### Programming language implementations
 below is an example of the differance betwwen python and java regular expessions given the smae pattern
 (https://stackoverflow.com/questions/30527195/different-behavior-of-same-regular-expression-in-python-and-java)
+### python regex example
 ```python
 import re
 p = re.compile("[0-9]*(?:\\.[0-9]+)?[^0-9]*D\\([MW]\\)\\s*US")
@@ -78,6 +79,7 @@ result will be:
 9.5 D(M) US
  escape characters in regular expressions, \\d in Java, and \d in python
 
+### Java regex example
 ```java
 import java.util.*;
 import java.lang.*;
@@ -113,6 +115,26 @@ so the following text "123.+[]" in java will give 8 matches("1","2","3",".","+",
 python give the following matches ("123.","[]")
 
 ### Text Directed Verus Regexp implementation
+
+#### Text Directed
+
+##### Sumarry
+
+##### Advantages
+
+##### Disadvantages
+Doesn't have backtraking 
+##### Example implementation
+(Set|SetValue) on input "SetValue" will match "SetValue"
+#### Regexp Directed
+##### Sumarry
+Starting at the first character in the target text a sub set of the pattern (form left to right) is used to verfiy that this contains a match. It adds another that sub set a repearts for verifaction of a match in the target text. If that fails it goes to the next character in the target text and repeats the process until it finds the first success in the total pattern
+##### Advantages
+Does have backtraking 
+##### Disadvantages
+
+##### Example implementation
+(Set|SetValue) on input "SetValue" will match "Set"
 
 
 ## Can all formal languages be encoded as regular expressions?
