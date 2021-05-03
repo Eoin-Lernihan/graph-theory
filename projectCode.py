@@ -1,4 +1,10 @@
 import sys
+import argparse
+
+parser = argparse.ArgumentParser(description='Process some integers.')
+parser.add_argument('--test', dest='accumulate', action='store_const',
+                    const=sum, default=max,
+                    help='Help with testing the code')
 
 print("Hello there user")
 word = ''
@@ -52,10 +58,10 @@ if crotchetEndsWithMatch == True:
 f = open(path, 'r')
 line = f.readline()
 while line:
-  if exactMatch:
-    if trueWord == line:
+  if containsMatch:
+    if any(substring in line for substring in trueWords):
       print(line)
-  elif containsMatch:
+  elif exactMatch:
     if trueWord in line:
       print(line)
   elif startsWithMatch:
