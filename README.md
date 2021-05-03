@@ -79,3 +79,8 @@ so the following text "123.+[]" in java will give 8 matches("1","2","3",".","+",
 python give the following matches ("123.","[]")
 ## Can all formal languages be encoded as regular expressions?
  A formal language consists of words whose letters are taken from an alphabet and are well-formed according to a specific set of rules. Not formaly you regular experssion will give syntax errors due to formal languages are strict on it's rules. It is possible given that your regular expression is quite percise it would be possible. regylar expression is also drived form formal languages 
+
+Talk about grammar.
+
+https://web.mit.edu/6.005/www/fa15/classes/17-regex-grammars/
+
