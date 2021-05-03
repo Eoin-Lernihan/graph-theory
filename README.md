@@ -64,9 +64,10 @@ Although they are commonly classified as "text"  or "regex" directed.
 <b>Text</b> directed process each character in the text and looks for a match in teh regexp. If none found it moves to the next character in the text.
 <b>regexp</b> directed takes the a elemnt of the regexp pattern and tries to find a match in the text. If none found move to teh next element in the regexp.  
 
+
 ## How do regular expressions differ across implementations?
 ### Programming language implementations
-below is an example of the differance betwwen python and java regular expessions given the smae pattern
+below is an example of the differance between python and java regular expessions given the smae pattern
 (https://stackoverflow.com/questions/30527195/different-behavior-of-same-regular-expression-in-python-and-java)
 ### python regex example
 ```python
@@ -76,17 +77,10 @@ test_str = "9.5 D(M) US"
 print re.search(p, test_str).group()
 ```
 result will be:
-9.5 D(M) US
- escape characters in regular expressions, \\d in Java, and \d in python
+9.5 D(M) US in python
 
 ### Java regex example
 ```java
-import java.util.*;
-import java.lang.*;
-import java.io.*;
-import java.util.regex.*;
-class Ideone
-{
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		Pattern FALLBACK_MEN_SIZE_PATTERN = Pattern.compile("([0-9]*)([\\.[0-9]+]?)([^0-9]*)D\\([M|W]\\)\\s*US");
@@ -98,20 +92,30 @@ class Ideone
             System.out.println(matcher.group(3));
         }
     }
- 
-}
 ```
-result will be 
-5
+result will be 5 matches in java
+
+This is cause by escape characters in regular expressions, "\\d" in Java while in python it is "\d"
 
 explanastion
-[\.[0-9]+]?
-java|
-java see this as a one chacater macth, "." or a numberic digit.
+
+Let see another way java and python differ using
+[\.[0-9]+]? as the regex with the following text "123.+[]"
+Java | Python
+------------ | -------------
+  Java see this as one total expersion | Python see this as 2 seperate expersion
+  Java | 
+Java will give 8 matches("1","2","3",".","+","","","","") | python give the following matches ("123.","[]")
+
+The reasoning for the above is the first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters"." or a numberic digit. The second pattern is "]?" matches the "]" characters so java will see this as a one chacater macth, "." or a numberic digit.
+
+
 java see this as one total expersion
 Python see this as 2 seperate expersion
 The first expersion ending in the first "]" the "+" after that matches that muliplte intances of the characters"." or a numberic digit. The second pattern is "]?" matches the "]" characters, 
-so the following text "123.+[]" in java will give 8 matches("1","2","3",".","+","","","","")
+so the following text "123.+[]"
+
+ in java will give 8 matches("1","2","3",".","+","","","","")
 python give the following matches ("123.","[]")
 
 ### Text Directed Verus Regexp implementation
@@ -135,6 +139,8 @@ Does have backtraking
 
 ##### Example implementation
 (Set|SetValue) on input "SetValue" will match "Set"
+
+
 
 
 ## Can all formal languages be encoded as regular expressions?
