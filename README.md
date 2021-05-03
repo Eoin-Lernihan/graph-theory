@@ -138,9 +138,40 @@ Does have backtraking
 
 
 ## Can all formal languages be encoded as regular expressions?
- A formal language consists of words whose letters are taken from an alphabet and are well-formed according to a specific set of rules. Not formaly you regular experssion will give syntax errors due to formal languages are strict on it's rules. It is possible given that your regular expression is quite percise it would be possible. regylar expression is also drived form formal languages 
+### <b>Formal Languages </b>
+Formal languages represent concepts that are alligned with speicfic meaning using words. The grammar of formal languages is a means to define the language. Therefore these langauges consists of a set of words and are combined to a set of rules.
 
-Talk about grammar.
+#### <b>Grammar</b>
+Grammar (or formal grammar) is used to describe and explain strings derived from an alaphabeth of a language. Grammar also  ensures that according to that languague's syntax the strings are valid. Grammar is used in formal language theory ultimately to give clarity.
+
+#### <b> Application of representing formal languages </b>
+
+While Regular expression does provide clarity to some elements required for formal languages Regular expression still fails to support in describing nested chain structures or syntactic structures such as balanced parenthsis, if else etc; These sytaxes are common across formal languages making regualr ecpression narrow in scope and non hollistic.
+
+This  example outlines that if this syntactic strucuture were not availible, we could represent Java in the form:
+
+``` java
+statement ::= 
+  '{' statement* '}'
+| 'if' '(' expression ')' statement ('else' statement)?
+| 'for' '(' forinit? ';' expression? ';' forupdate? ')' statement
+| 'while' '(' expression ')' statement
+| 'do' statement 'while' '(' expression ')' ';'
+| 'try' '{' statement* '}' ( catches | catches? 'finally' '{' statement* '}' )
+| 'switch' '(' expression ')' '{' switchgroups '}'
+| 'synchronized' '(' expression ')' '{' statement* '}'
+| 'return' expression? ';'
+| 'throw' expression ';' 
+| 'break' identifier? ';'
+| 'continue' identifier? ';'
+| expression ';' 
+| identifier ':' statement
+| ';'
+```
+https://web.mit.edu/6.005/www/fa15/classes/17-regex-grammars/
+
+The above demonstrates an instant where regular expression for java  caputures most of the syantax. However, it does not cover nested parenthesis e.g nested if else, for loops etc..
+while simple languages could be repsented in regex it simply doesn't make sense for mor formal languages when the required regex expression can be extremely commplex making it very hard to understand and maintain. This makes it extremely difficult keep track and follow what is happening inside of the expression.
 
 https://web.mit.edu/6.005/www/fa15/classes/17-regex-grammars/
 
